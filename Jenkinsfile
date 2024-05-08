@@ -39,8 +39,12 @@ pipeline {
            }
       steps{
         script {
-          docker.withRegistry( 'https://registry.hub.docker.com', registryCredential ) {
-            dockerImage.push("latest")
+          // docker.withRegistry( 'https://registry.hub.docker.com', registryCredential ) {
+          //   dockerImage.push("latest")
+          // }
+          withDockerRegistry(credentialsId: 'dockerhublogin', url: 'https://registry.hub.docker.com') {
+            sh 'docker build -t nhutlinh231/frontend-k8s .'
+            sh 'docker push nhutlinh231/frontend-k8s'
           }
         }
       }
@@ -49,11 +53,10 @@ pipeline {
     // stage('Deploying App to Kubernetes') {
     //   steps {
     //     script {
-    //       kubernetesDeploy(configs: "deploymentservice.yml", kubeconfigId: "kubernetes")
+    //       kubernetesDeploy(configs: "deployment.yml", kubeconfigId: "kubernetes")
     //     }
     //   }
     // }
-
   }
 
 }
