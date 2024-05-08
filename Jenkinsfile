@@ -17,7 +17,9 @@ pipeline {
 
   agent any
 
-  tools {nodejs "node"}
+  tools {
+    nodejs '21.7.1'
+  }
 
   stages {
 
@@ -29,6 +31,7 @@ pipeline {
 
     stage('Build') {
       steps {
+        sh 'npm version'
         sh 'cd /var/jenkins_home/workspace/frontend-instagram-CICD && npm install && npm run build'
         echo 'Run build successfully...'
       }
