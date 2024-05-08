@@ -1,13 +1,3 @@
-// pipeline {
-//     agent any
-//     stages {
-//         stage('Clone') {
-//             steps {
-//                 git branch: 'main', url: 'https://github.com/nhutlin/Instagram-frontend.git'
-//             }
-//         }
-//     }
-// }
 pipeline {
 
   environment {
@@ -64,26 +54,8 @@ pipeline {
         }
       }
     }
-
-    // stage('Deploying App to Kubernetes') {
-    //   steps {
-    //     script {
-    //       kubernetesDeploy(configs: "deployment.yml", kubeconfigId: "kubernetes")
-    //     }
-    //   }
-    // }
-
-    stage('Deploy to Minikube') {
-      steps {
-        script {
-          sh "kubectl config use-context minikube"
-          sh "kubectl apply -f /var/jenkins_home/workspace/FE-Instagram-CICD/deployment.yaml"
-          //sh "kubectl rollout status deployment/$K8S_DEPLOYMENT --namespace=$K8S_NAMESPACE"
-        }
-      }
-    }
   }
-  
+
   post {
         always {
             // Clean up docker images
@@ -91,5 +63,4 @@ pipeline {
             sh "docker image prune -f"
         }
     }
-
 }
