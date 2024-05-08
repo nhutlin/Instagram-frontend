@@ -12,7 +12,7 @@ pipeline {
 
   environment {
     dockerimagename = "nhutlinh231/frontend-k8s"
-    dockerImage = "nhutlinh231/frontend-k8s"
+    dockerImage = ""
   }
 
   agent any
@@ -43,7 +43,6 @@ pipeline {
           //   dockerImage.push("latest")
           // }
           withDockerRegistry(credentialsId: 'dockerhublogin', url: 'https://registry.hub.docker.com') {
-            sh 'docker build -t nhutlinh231/frontend-k8s .'
             sh 'docker push nhutlinh231/frontend-k8s'
           }
         }
