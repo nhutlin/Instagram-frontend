@@ -25,6 +25,20 @@ pipeline {
       }
     }
 
+    stage('Build') {
+      steps {
+        sh 'cd /var/jenkins_home/workspace/frontend-instagram-CICD && npm install && npm run build'
+        echo 'Run build successfully...'
+      }
+    }
+
+    stage('Test') {
+      steps {
+        sh 'cd /var/jenkins_home/workspace/frontend-instagram-CICD && npm run test'
+        echo 'Run test successfully...'
+      }
+    }
+
     stage('Build image') {
       steps{
         script {
