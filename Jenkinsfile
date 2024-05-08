@@ -74,4 +74,12 @@ pipeline {
     // }
   }
 
+  post {
+        always {
+            // Clean up docker images
+            cleanWs()
+            sh "docker image prune -f"
+        }
+    }
+
 }
