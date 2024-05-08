@@ -17,6 +17,8 @@ pipeline {
 
   agent any
 
+  tools {nodejs "nodejs"}
+
   stages {
 
     stage('Checkout Source') {
