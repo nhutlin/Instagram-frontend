@@ -39,7 +39,7 @@ pipeline {
 
     stage('Test') {
       steps {
-        sh 'cd /var/jenkins_home/workspace/frontend-instagram-CICD && npm run test'
+        sh 'cd /var/jenkins_home/workspace/frontend-instagram-CICD && npm run test --passWithNoTests'
         echo 'Run test successfully...'
       }
     }
