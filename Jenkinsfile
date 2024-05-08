@@ -39,11 +39,8 @@ pipeline {
            }
       steps{
         script {
-          // docker.withRegistry( 'https://registry.hub.docker.com', registryCredential ) {
-          //   dockerImage.push("latest")
-          // }
-          withDockerRegistry(credentialsId: 'dockerhublogin', url: 'https://registry.hub.docker.com') {
-            sh 'docker push nhutlinh231/frontend-k8s'
+          docker.withRegistry( 'https://registry.hub.docker.com', registryCredential ) {
+            dockerImage.push("latest")
           }
         }
       }
