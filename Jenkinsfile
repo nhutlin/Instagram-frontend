@@ -32,14 +32,14 @@ pipeline {
     stage('Build') {
       steps {
         sh 'npm version'
-        sh 'cd /var/jenkins_home/workspace/frontend-instagram-CICD && npm install && npm run build'
+        sh 'cd /var/jenkins_home/workspace/FE-Instagram-CICD && npm install && npm run build'
         echo 'Run build successfully...'
       }
     }
 
     stage('Test') {
       steps {
-        sh 'cd /var/jenkins_home/workspace/frontend-instagram-CICD && npm run test'
+        sh 'cd /var/jenkins_home/workspace/FE-Instagram-CICD && npm run test'
         echo 'Run test successfully...'
       }
     }
@@ -65,13 +65,13 @@ pipeline {
       }
     }
 
-    stage('Deploying App to Kubernetes') {
-      steps {
-        script {
-          kubernetesDeploy(configs: "deployment.yml", kubeconfigId: "kubernetes")
-        }
-      }
-    }
+    // stage('Deploying App to Kubernetes') {
+    //   steps {
+    //     script {
+    //       kubernetesDeploy(configs: "deployment.yml", kubeconfigId: "kubernetes")
+    //     }
+    //   }
+    // }
   }
 
 }
