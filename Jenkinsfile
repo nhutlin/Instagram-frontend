@@ -57,18 +57,16 @@ pipeline {
 
     stage('Deploying App to Kubernetes') {
       steps {
-        script {
-          sh 'sudo kubectl apply -f /var/lib/jenkins/workspace/FE-Instagram-CICD/deployment.yml'
-        }
+        'sudo kubectl apply -f /var/lib/jenkins/workspace/FE-Instagram-CICD/deployment.yml'
       }
     }
   }
 
-  post {
-        always {
-            // Clean up docker images
-            cleanWs()
-            sh "docker image prune -f"
-        }
-    }
+  // post {
+  //       always {
+  //           // Clean up docker images
+  //           cleanWs()
+  //           sh "docker image prune -f"
+  //       }
+  //   }
 }
