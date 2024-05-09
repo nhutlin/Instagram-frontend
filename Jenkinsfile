@@ -57,7 +57,7 @@ pipeline {
 
     stage('Deploying App to Kubernetes') {
       steps {
-        sh 'kubectl apply -f /var/lib/jenkins/workspace/FE-Instagram-CICD/deployment.yml'
+        sh 'cd /var/lib/jenkins/workspace/FE-Instagram-CICD &&  kubectl apply -f  deployment.yml'
       }
     }
   }
