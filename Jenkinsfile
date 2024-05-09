@@ -58,7 +58,7 @@ pipeline {
     stage('Deploying App to Kubernetes') {
       steps {
         script {
-          kubernetesDeploy(configs: "deploymentservice.yml", kubeconfigId: "kubernetes")
+          sh 'sudo kubectl apply -f /var/lib/jenkins/workspace/FE-Instagram-CICD/deployment.yml'
         }
       }
     }
