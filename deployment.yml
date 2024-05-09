@@ -1,10 +1,38 @@
 # frontend-deployment.yaml
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   name: fe-deployment
+# spec:
+#   replicas: 1
+#   selector:
+#     matchLabels:
+#       app: fe
+#   template:
+#     metadata:
+#       labels:
+#         app: fe
+#     spec:
+#       containers:
+#       - name: fe
+#         image: nhutlinh231/frontend-k8s
+#         ports:
+#         - containerPort: 3000
+#       resources:
+#       limits:
+#         memory: 512Mi
+#         cpu: "1"
+#       requests:
+#         memory: 256Mi
+#         cpu: "0.2"
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: fe-deployment
+  labels:
+    app: fe
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: fe
@@ -14,10 +42,10 @@ spec:
         app: fe
     spec:
       containers:
-      - name: fe
-        image: nhutlinh231/frontend-k8s
-        ports:
-        - containerPort: 3000
+        - name: fe
+          image: nhutlinh231/frontend-k8s
+          ports:
+            - containerPort: 3000
       resources:
       limits:
         memory: 512Mi
@@ -25,6 +53,7 @@ spec:
       requests:
         memory: 256Mi
         cpu: "0.2"
+        
 ---
 apiVersion: v1
 kind: Service
