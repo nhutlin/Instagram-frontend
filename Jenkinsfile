@@ -67,24 +67,24 @@ pipeline {
     //         }
     //     }
 
-        stage('Deploy to K8s'){
-            steps{
-                script{
-                    dir('Kubernetes') {
-                        withKubeConfig(caCertificate: '', clusterName: 'minikube', contextName: 'minikube', credentialsId: 'minikubeconfig', namespace: 'default', restrictKubeConfigAccess: false, serverUrl: 'https://192.168.49.2:8443/') {
-                                sh 'kubectl apply -f /var/lib/jenkins/workspace/FE-Instagram-CICD/deployment.yml'
-                        }   
-                    }
-                }
-            }
+    stage('Deploy to K8s'){
+      steps{
+        script{
+          dir('Kubernetes') {
+            withKubeConfig(caCertificate: '', clusterName: 'minikube', contextName: 'minikube', credentialsId: 'minikubeconfig', namespace: 'default', restrictKubeConfigAccess: false, serverUrl: 'https://192.168.49.2:8443/') {
+              sh 'kubectl apply -f /var/lib/jenkins/workspace/FE-Instagram-CICD/deployment.yml'
+            } 
+          }
         }
+      }
+    }
   }
 
-  // post {
-  //       always {
-  //           // Clean up docker images
-  //           cleanWs()
-  //           sh "docker image prune -f"
-  //       }
-  //   }
+  post {
+        always {
+            // Clean up docker images
+            cleanWs()
+            sh "docker image prune -f"
+        }
+    }
 }
