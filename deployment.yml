@@ -19,23 +19,23 @@
 #         ports:
 #         - containerPort: 3000
 
-apiVersion: apps/v1
+apiVersion: v1
 kind: Deployment
 metadata:
   name: fe-deploy
-  labels: 
+  labels:
     app: myapp
     type: server
 spec:
   replicas: 1
-  selector:
-    matchLabels:
-      app: fe
+  # selector:
+  #   matchLabels:
+  #     app: fe
   template:
     metadata:
       labels:
         app: fe
-    spec: 
+    spec:
       containers:
       - name: fe
         image: nhutlinh231/frontend-k8s
