@@ -71,7 +71,7 @@ pipeline {
             steps{
                 script{
                     dir('Kubernetes') {
-                        withKubeConfig(caCertificate: '', clusterName: 'minikube', contextName: 'minikube', credentialsId: 'minikube', namespace: 'default', restrictKubeConfigAccess: false, serverUrl: 'https://192.168.49.2:8443/') {
+                        withKubeConfig(caCertificate: '', clusterName: 'minikube', contextName: 'minikube', credentialsId: 'minikubeconfig', namespace: 'default', restrictKubeConfigAccess: false, serverUrl: 'https://192.168.49.2:8443/') {
                                 sh 'kubectl apply -f /var/lib/jenkins/workspace/FE-Instagram-CICD/deployment.yml'
                         }   
                     }
