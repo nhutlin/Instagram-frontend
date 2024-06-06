@@ -7,6 +7,11 @@ pipeline {
 
   agent any
 
+  environment {
+    SONARQUBE_SCANNER_PARAMS = '-Dsonar.login=01578500b59e686815db1d8605822d07e78cf1db'
+  }
+
+
   tools {
     nodejs '20.13.1'
   }
@@ -31,6 +36,26 @@ pipeline {
       steps {
         sh 'cd /var/lib/jenkins/workspace/Github-FE-Instagram && npm run test'
         echo 'Run test successfully...'
+      }
+    }
+
+    stage('SonarCloud Analysis') {
+      steps {
+        withSonarQubeEnv('sonarcloud') { // 'SonarCloud' is the name you gave to the SonarQube instance in Jenkins
+          sh 'npm install -g sonarqube-scanner'
+          sh 'sonar-scanner \
+            -Dsonar.projectKey=nhutlinh \
+            -Dsonar.organization=NhutLinh \
+            -Dsonar.sources=. \
+            -Dsonar.host.url=https://sonarcloud.io \
+            -Dsonar.login=${env.SONARQUBE_SCANNER_PARAMS}'          
+                }
+            }
+        }
+
+    stage('Quality Gate') {
+      steps {
+        waitForQualityGate abortPipeline: true
       }
     }
 
