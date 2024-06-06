@@ -30,7 +30,7 @@ pipeline {
     stage('Test') {
       steps {
         sh 'cd /var/lib/jenkins/workspace/Github-FE-Instagram && npm run test'
-        echo 'Run test successfully!'
+        echo 'Run test successfully...'
       }
     }
 
