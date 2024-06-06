@@ -22,14 +22,14 @@ pipeline {
     stage('Build') {
       steps {
         sh 'npm -v'
-        sh 'cd /var/lib/jenkins/workspace/FE-Instagram-CICD && npm install && npm run build'
+        sh 'cd /var/lib/jenkins/workspace/Github-FE-Instagram && npm install && npm run build'
         echo 'Run build successfully...'
       }
     }
 
     stage('Test') {
       steps {
-        sh 'cd /var/lib/jenkins/workspace/FE-Instagram-CICD && npm run test'
+        sh 'cd /var/lib/jenkins/workspace/Github-FE-Instagram && npm run test'
         echo 'Run test successfully...'
       }
     }
@@ -83,7 +83,6 @@ pipeline {
   post {
         always {
             // Clean up docker images
-            cleanWs()
             sh "docker image prune -f"
         }
     }
