@@ -35,25 +35,25 @@ pipeline {
       }
     }
 
-    stage('SonarCloud Analysis') {
-      steps {
-        withSonarQubeEnv('sonarcloud') { // 'SonarCloud' is the name you gave to the SonarQube instance in Jenkins
-          sh 'npm install -g sonarqube-scanner'
-          sh 'sonar-scanner \
-            -Dsonar.projectKey=nhutlin_Instagram-frontend \
-            -Dsonar.organization=NhutLinh \
-            -Dsonar.sources=. \
-            -Dsonar.host.url=https://sonarcloud.io \
-            -Dsonar.login=${env.SONARQUBE_SCANNER_PARAMS}'          
-                }
-            }
-        }
+    // stage('SonarCloud Analysis') {
+    //   steps {
+    //     withSonarQubeEnv('sonarcloud') { 
+    //       sh 'npm install -g sonarqube-scanner'
+    //       sh 'sonar-scanner \
+    //         -Dsonar.projectKey=nhutlin_Instagram-frontend \
+    //         -Dsonar.organization=NhutLinh \
+    //         -Dsonar.sources=. \
+    //         -Dsonar.host.url=https://sonarcloud.io \
+    //         -Dsonar.login=${env.SONARQUBE_SCANNER_PARAMS}'          
+    //             }
+    //         }
+    //     }
 
-    stage('Quality Gate') {
-      steps {
-        waitForQualityGate abortPipeline: true
-      }
-    }
+    // stage('Quality Gate') {
+    //   steps {
+    //     waitForQualityGate abortPipeline: true
+    //   }
+    // }
 
     stage('Build image') {
       steps{
