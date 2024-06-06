@@ -3,14 +3,10 @@ pipeline {
   environment {
     dockerimagename = "nhutlinh231/frontend-k8s"
     dockerImage = ""
-  }
-
-  agent any
-
-  environment {
     SONARQUBE_SCANNER_PARAMS = '-Dsonar.login=01578500b59e686815db1d8605822d07e78cf1db'
   }
 
+  agent any
 
   tools {
     nodejs '20.13.1'
@@ -44,7 +40,7 @@ pipeline {
         withSonarQubeEnv('sonarcloud') { // 'SonarCloud' is the name you gave to the SonarQube instance in Jenkins
           sh 'npm install -g sonarqube-scanner'
           sh 'sonar-scanner \
-            -Dsonar.projectKey=nhutlinh \
+            -Dsonar.projectKey=nhutlin_Instagram-frontend \
             -Dsonar.organization=NhutLinh \
             -Dsonar.sources=. \
             -Dsonar.host.url=https://sonarcloud.io \
